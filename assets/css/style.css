@@ -46,12 +46,48 @@ img {
 
 .bnt {
     width: 15em;
-    height: 25px;
+    height: 20px;
     margin: .5em;
     font-size: 1em;
+    background: white;
 }
 
 #restartbnt {
     margin: 2em auto;
     display: none;
+    background: white;
+}
+
+/* Medium devices */
+@media only screen and (max-width: 768px) {
+    #main {
+        height: 55em;   
+    }
+}
+
+/* Small devices */
+@media only screen and (max-width: 640px) {
+    #main {
+        width: 90%;
+    }
+
+    #main_game {
+        top: 8em;
+        width: 100%;
+        height: 8em;
+    }
+
+    #timer{
+        height: 2em;
+    }
+
+    #header {
+        height: 8em;
+    }
+
+    h1 {
+        padding: .5em;
+        font-size: 2.5em;
+    }
+
 }

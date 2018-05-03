@@ -111,14 +111,15 @@ function print_questions_n_choices(){
     // print choice
     var buttons = $("<div>");
     for(var j = 0; j < 4; j++){
-        var bnt = $("<input>");
-        bnt.attr("type","button").attr("class",'bnt')
-        bnt.attr("value",questions[q_index].choices[j]);
+        var bnt = $("<button>");
+        bnt.attr("class",'bnt')
+        bnt.text(questions[q_index].choices[j]);
         buttons.append(bnt,$("<br>"));
     }
     $("#choices").html(buttons);
 }
 
+// change questions order every time player restart the game
 function shuffle_question_array(array){
     var result = [];
     for (var i = array.length - 1; i > -1; i--) {
