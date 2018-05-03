@@ -1,6 +1,7 @@
 body {
     font-family: 'Acme', sans-serif;
-    background-image: url("../images/doodles/doodles.png")
+    background-image: url("../images/doodles/doodles.png");
+
 }
 
 #main {
@@ -31,9 +32,24 @@ h1 {
     /* left: 10%; */
     width: 100%;
     height: 40em;
+    line-height: 2em;
+    /* letter-spacing: .1em; */
+    word-spacing: .2em;
 }
 
 #timer, #question, #answer{
     width: 100%;
-    height: 8em;
+    height: 5em;
+}
+
+img {
+    width: 20em;
+    height: 15em;
+}
+
+.bnt {
+    width: 15em;
+    height: 25px;
+    margin: .5em;
+    font-size: 1em;
 }
