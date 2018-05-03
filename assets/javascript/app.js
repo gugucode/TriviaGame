@@ -90,62 +90,77 @@ function myTimer(time){
     }
 }
 
+// print the final result when player finishes the game
 function print_overall_result(){
     $("#question").html("You answer "+ correct_num + " questions correctly.");
     $("#choices").html("You answer "+ failure_num + " questions incorrectly.");
     $("#answer").html("You missed "+ missed_run + " questions questions.")
     $("#image").html("<img src=" + game_over_image + ">");
+    $("#restartbnt").attr("style","display:block");
 }
 
+// print question and choices
 function print_questions_n_choices(){
     $("#answer").empty();
     $("#image").empty();
 
     // print question
-    $("#question").html("<h2>" + questions[q_index].question + "</h2>");
+    var q = (q_index+1) + "/" + questions.length +": " + questions[q_index].question;
+    $("#question").html("<h2>" + q + "</h2>");
 
-    // print choice tags
+    // print choice
     var buttons = $("<div>");
     for(var j = 0; j < 4; j++){
         var bnt = $("<input>");
         bnt.attr("type","button").attr("class",'bnt')
         bnt.attr("value",questions[q_index].choices[j]);
-        // bnt.append($("<br>"));
         buttons.append(bnt,$("<br>"));
     }
     $("#choices").html(buttons);
 }
 
+function shuffle_question_array(array){
+    var result = [];
+    for (var i = array.length - 1; i > -1; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        result.push(array[j]);
+    }
+    return result;
+}
+
+// game function and set checker and game killer process
 function trivialGame(){
     start_new_game = false;
     can_select = true;
     q_index++;
-    if(q_index < questions.length){
+    if(q_index < questions.length){  // if player doesn't answer all questions
         // print timer
-        var t = 10;
-        myTimer(t--)
+        var t = 20;
+        myTimer(t--);
         timer = setInterval(function(){
                     myTimer(t--)
                 }, SECOND);
 
-        // Time out counter
+        // Print answer when time out
         print_time_out = setTimeout(function(){
                             clearInterval(timer);
-                            $("#answer").html("<h2>Time out!</h2><h2>The correct answer is: " + questions[q_index].answer+ "</h2");
+                            var a = "The correct answer is: " + questions[q_index].answer;
+                            $("#answer").empty();
+                            $("#answer").append("<h2>Time out!</h2>");
+                            $("#answer").append("<h2>" + a + "</h2");
                             $("#image").html("<img src=" + questions[q_index].image + ">");
                             missed_run++;                           
-                        },SECOND*10);
+                        },SECOND*20);
         
-        
+        // set the game start checker to continue with next question
         can_start_game = setTimeout(function(){
                             start_new_game = true;
-                        },SECOND*14);
+                        },SECOND*25);
         
         print_questions_n_choices();
         
     }else{
         print_overall_result();
-        clearInterval(game_controller);
     }
 }
 
@@ -159,7 +174,7 @@ $("document").ready(function(){
 
     // handle button click event
     $("#choices").on("click",".bnt",function(){
-        if(can_select){
+        if(can_select){  //allow player to select answer when game is on.
             can_select = false;
             clearInterval(timer); // Stop timer
             clearTimeout(print_time_out);  // stop print time out event
@@ -169,14 +184,28 @@ $("document").ready(function(){
                 $("#image").html("<img src=" + questions[q_index].image + ">");
                 correct_num++;
             }else{
-                $("#answer").html("<h2>Nope!</h2><h2>The correct answer is: " + questions[q_index].answer+ "</h2");
+                $("#answer").empty();
+                $("#answer").append("<h2>Nope!</h2>");
+                $("#answer").append("<h2>The correct answer is: " + questions[q_index].answer+ "</h2");
                 $("#image").html("<img src=" + questions[q_index].image + ">");
                 failure_num++;
             }
 
             // start game after 4 seconds
-            setTimeout(trivialGame,SECOND*4);
+            setTimeout(trivialGame,SECOND*5);
         }    
+    })
+
+    // handle restart game event
+    $("#restart").on("click","#restartbnt",function(){
+        correct_num = 0;
+        failure_num = 0;
+        missed_run = 0;
+        q_index = -1;
+        questions = shuffle_question_array(questions);
+        console.log(questions);
+        start_new_game = true;
+        $("#restartbnt").attr("style","display:none");
     })
           
 })
