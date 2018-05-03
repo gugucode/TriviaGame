@@ -180,7 +180,7 @@ $("document").ready(function(){
             clearInterval(timer); // Stop timer
             clearTimeout(print_time_out);  // stop print time out event
             clearTimeout(can_start_game); // stop can_start_game event
-            if($(this).val() === questions[q_index].answer){ // If selected choice is correct
+            if($(this).text() === questions[q_index].answer){ // If selected choice is correct
                 $("#answer").html("<h2>Correct!</h2");
                 $("#image").html("<img src=" + questions[q_index].image + ">");
                 correct_num++;
