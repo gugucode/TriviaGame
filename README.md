@@ -1,10 +1,10 @@
 # TriviaGame
 
-In this game, player needs to answer the multiple choice question within a period (20 second).  
+In this game, player needs to answer one multiple choice question within a period (20 second).  
 
-1. When player clicks on the answer that he/she think is correct, timer will stop counting,
+1. When player clicks on the answer that he/she thinks it is correct, timer will stop counting,
    the result will be render on the page. The page will render next question after 4 seconds.
-2. If player doesn't pick his/her choice, it will time out and render the answer
+2. If player doesn't pick his/her choice, it will time out and render the answer.
 3. When player finishes 10 questions, the page will render the result about how many questions are answered correctly, incorrectly and missed.
 
 
