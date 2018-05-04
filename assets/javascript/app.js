@@ -123,7 +123,6 @@ function print_questions_n_choices(){
 function shuffle_question_array(array){
     for (var i = array.length - 1; i > -1; i--) {
         var j = Math.floor(Math.random() * (i + 1));
-        console.log("j="+j);
         var temp = array[i];
         array[i] = array[j];
         array[j] = temp;
@@ -131,6 +130,7 @@ function shuffle_question_array(array){
     return array;
 }
 
+// change questions' choice order every time player restart the game
 function shuffle_answers_array(){
     for(var i = 0; i < questions.length; i++){
         questions[i].choices = shuffle_question_array(questions[i].choices);
@@ -174,9 +174,12 @@ function trivialGame(){
 }
 
 $("document").ready(function(){
-    // Game controller running in back ground to check when to start game
+
+    // shuffle the questions array and choice array
     questions = shuffle_question_array(questions);
-    console.log(questions);
+    shuffle_answers_array();
+
+    // Game controller running in back ground to check when to start game
     game_controller = setInterval(function(){
                         if(start_new_game){
                             trivialGame();
@@ -215,7 +218,6 @@ $("document").ready(function(){
         q_index = -1;
         questions = shuffle_question_array(questions);
         shuffle_answers_array();
-        console.log(questions);
         start_new_game = true;
         $("#restartbnt").attr("style","display:none");
     })
