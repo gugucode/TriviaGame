@@ -121,12 +121,20 @@ function print_questions_n_choices(){
 
 // change questions order every time player restart the game
 function shuffle_question_array(array){
-    var result = [];
     for (var i = array.length - 1; i > -1; i--) {
         var j = Math.floor(Math.random() * (i + 1));
-        result.push(array[j]);
+        console.log("j="+j);
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
     }
-    return result;
+    return array;
+}
+
+function shuffle_answers_array(){
+    for(var i = 0; i < questions.length; i++){
+        questions[i].choices = shuffle_question_array(questions[i].choices);
+    }
 }
 
 // game function and set checker and game killer process
@@ -167,6 +175,8 @@ function trivialGame(){
 
 $("document").ready(function(){
     // Game controller running in back ground to check when to start game
+    questions = shuffle_question_array(questions);
+    console.log(questions);
     game_controller = setInterval(function(){
                         if(start_new_game){
                             trivialGame();
@@ -204,6 +214,7 @@ $("document").ready(function(){
         missed_run = 0;
         q_index = -1;
         questions = shuffle_question_array(questions);
+        shuffle_answers_array();
         console.log(questions);
         start_new_game = true;
         $("#restartbnt").attr("style","display:none");
