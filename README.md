@@ -14,11 +14,7 @@ You can start playing this game at https://gugucode.github.io/TriviaGame/ .
 
 or 
 
-Goes to https://gugucode.github.io/Responsive-Portfolio/projects.html -> click "Trivial Game"
-
-### Prerequisites
-
-null
+Go to https://gugucode.github.io/my-Portfolio/project.html -> click "Trivial Game"
 
 
 ## Built With
@@ -33,7 +29,7 @@ Please contact Erin at meiyuechang@gmail.com for details on our code of conduct,
 
 ## Authors
 
-* **Erin Mei** - *Initial work* - [Portfolio](https://gugucode.github.io/Responsive-Portfolio/index.html)
+* **Erin Mei** - *Initial work* - [Portfolio](https://gugucode.github.io/my-Portfolio/project.html)
 
 
 ## License
